@@ -1,0 +1,19 @@
+#!/bin/sh
+#
+# Copyright (c) 2017-2019, AT&T Intellectual Property.
+# All rights reserved.
+#
+# SPDX-License-Identifier: GPL-2.0-only
+#
+# generate dependency to mount EFI System Partition
+#
+
+DESTDIR="${1:-/tmp}"
+
+systemd_dir="/lib/systemd/system"
+config_loaded_wants="${DESTDIR}/config-loaded.target.wants"
+
+if [ -d /sys/firmware/efi ] ; then
+    mkdir -p "${config_loaded_wants}"
+    ln -sf "$systemd_dir/boot-efi.mount" "${config_loaded_wants}/"
+fi

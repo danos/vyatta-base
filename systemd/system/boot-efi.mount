@@ -1,0 +1,14 @@
+[Unit]
+Description=EFI System Partition File System
+Documentation=http://www.freedesktop.org/wiki/Software/systemd/APIFileSystems
+DefaultDependencies=no
+After=vyatta-image.service
+ConditionKernelCommandLine=vyatta-union
+ConditionPathExists=/sys/firmware/efi
+RequiresMountsFor=/boot /dev/disk/by-partlabel/ESP
+
+[Mount]
+What=/dev/disk/by-partlabel/ESP
+Where=/boot/efi
+Type=vfat
+Options=rw,relatime,umask=0077,errors=remount-ro

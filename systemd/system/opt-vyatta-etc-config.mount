@@ -1,0 +1,19 @@
+[Unit]
+Description=Legacy Vyatta configuration path mount
+#
+# On live booted machines (i.e. systems booted from LiveCD and systems
+# booted from images), the /config directory is bind mounted to
+# /opt/vyatta/etc/config for historical reasons.  We want all machines
+# to have the system config directory at /config because it is a
+# more convenient location.
+#
+Documentation=http://www.freedesktop.org/wiki/Software/systemd/APIFileSystems
+Before=system-configure.service
+ConditionPathExists=/config/.vyatta_config
+DefaultDependencies=no
+
+[Mount]
+What=/config
+Where=/opt/vyatta/etc/config
+Type=none
+Options=bind

@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -e
+
+if [ /opt/vyatta/etc/config -ef /config ]; then
+    echo "Skipping copy of template files."
+    exit 0
+fi
+
+mkdir -p /config
+cp -anT /opt/vyatta/etc/config /config
+touch /config/.vyatta_config

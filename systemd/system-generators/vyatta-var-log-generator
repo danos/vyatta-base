@@ -1,0 +1,47 @@
+#!/bin/sh
+# Copyright (c) 2017-2019, AT&T Intellectual Property.
+# All rights reserved.
+#
+# SPDX-License-Identifier: GPL-2.0-only
+#
+# Generate dependency to mount System Logging Partition
+#
+
+DESTDIR="${1:-/tmp}"
+
+systemd_dir="/lib/systemd/system"
+fs_target_wants="${DESTDIR}/local-fs.target.wants"
+
+setup_var_log_systemd() {
+    cat <<EOF > ${systemd_dir}/var-log.mount
+[Unit]
+Description = Mount rule for logs partition
+
+[Mount]
+What = LABEL=LOGS
+Where = /var/log/
+Type = ext4
+EOF
+}
+
+if ! grep -q vyatta-union /proc/cmdline; then
+    exit
+fi
+
+if [ -e /dev/disk/by-partlabel/LOGS ]; then
+    mkdir -p "${fs_target_wants}"
+    setup_var_log_systemd
+    ln -sf "$systemd_dir/var-log.mount" "${fs_target_wants}/"
+fi
+
+if [ -e /dev/disk/by-label/LOGS ]; then
+    mkdir -p "${fs_target_wants}"
+    setup_var_log_systemd
+    ln -sf "$systemd_dir/var-log.mount" "${fs_target_wants}/"
+fi
+
+if [ -e /dev/md/LOGS ]; then
+    mkdir -p "${fs_target_wants}"
+    setup_var_log_systemd
+    ln -sf "$systemd_dir/var-log.mount" "${fs_target_wants}/"
+fi

@@ -1,0 +1,13 @@
+[Unit]
+Description=Initialize Vyatta Configuration Directory
+DefaultDependencies=no
+Conflicts=shutdown.target
+After=local-fs.target
+Before=opt-vyatta-etc-config.mount system-preconfigure.service
+ConditionPathExists=!/config/.vyatta_config
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/opt/vyatta/sbin/vyatta-config-default
+StandardOutput=journal+console

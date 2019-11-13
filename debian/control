@@ -1,0 +1,33 @@
+Source: vyatta-base
+Section: admin
+Priority: optional
+Maintainer: Vyatta Package Maintainers <DL-vyatta-help@att.com>
+Build-Depends: autoconf,
+               automake,
+               autotools-dev,
+               cpio,
+               debhelper (>= 9),
+               dh-autoreconf
+Standards-Version: 3.9.5
+
+Package: vyatta-package-tools
+Architecture: all
+Depends: apt,
+         bash (>= 3.1),
+         dpkg (>= 1.14.16),
+         expect,
+         grep (>= 2.5),
+         sed (>= 4.1.5),
+         ${misc:Depends},
+         ${shlibs:Depends}
+Description: Vyatta full-upgrade script
+ This script allows a full-upgrade all vyatta software
+ using apt and pdkg.  It will install all vyatta packages,
+ regardless of whether the individual Vyatta package was
+ previously installed.
+
+Package: vyatta-base-systemd
+Architecture: all
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Vyatta specific systemd units
+ A collection of Vyatta specific systemd units.

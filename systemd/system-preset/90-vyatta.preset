@@ -1,0 +1,6 @@
+# the default Vyatta target
+enable config-loaded.target
+
+# explicitly disable extra mounts
+disable var-lib-libvirt-images.mount
+disable var-log.mount

@@ -1,0 +1,7 @@
+This package hosts the basic Vyatta related system scripts like:
+
+- systemd units and generators
+- package based update scripts
+
+All Vyatta image related functionality (e.g. live-boot, image installer, ...)
+is located in the vyatta-image-tools package.
