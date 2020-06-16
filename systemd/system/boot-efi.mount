@@ -2,7 +2,6 @@
 Description=EFI System Partition File System
 Documentation=http://www.freedesktop.org/wiki/Software/systemd/APIFileSystems
 DefaultDependencies=no
-After=vyatta-image.service
 ConditionKernelCommandLine=vyatta-union
 ConditionPathExists=/sys/firmware/efi
 RequiresMountsFor=/boot /dev/disk/by-partlabel/ESP
