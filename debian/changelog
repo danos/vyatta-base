@@ -1,3 +1,10 @@
+vyatta-base (1.10) unstable; urgency=medium
+
+  [ Charles (Chas) Williams ]
+  * Remove unsatisfiable dependency
+
+ -- Nicholas Brown <nick.brown@att.com>  Mon, 03 Aug 2020 09:16:57 +0000
+
 vyatta-base (1.9) unstable; urgency=medium
 
   * DANOS Import
